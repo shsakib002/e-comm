@@ -1,0 +1,183 @@
+{
+  "stats": [
+    {
+      "id": 1,
+      "title": "Total Revenue",
+      "value": "$45,231.89",
+      "change": "+20.1%",
+      "icon": "dollar-sign"
+    },
+    {
+      "id": 2,
+      "title": "Subscriptions",
+      "value": "+2350",
+      "change": "+180.1%",
+      "icon": "users"
+    },
+    {
+      "id": 3,
+      "title": "Sales",
+      "value": "+12,234",
+      "change": "+19%",
+      "icon": "credit-card"
+    },
+    {
+      "id": 4,
+      "title": "Active Now",
+      "value": "+573",
+      "change": "+201",
+      "icon": "activity"
+    }
+  ],
+  "salesData": [
+    { "name": "Jan", "total": 2400 },
+    { "name": "Feb", "total": 1398 },
+    { "name": "Mar", "total": 9800 },
+    { "name": "Apr", "total": 3908 },
+    { "name": "May", "total": 4800 },
+    { "name": "Jun", "total": 3800 },
+    { "name": "Jul", "total": 4300 }
+  ],
+  "recentSales": [
+    {
+      "id": 1,
+      "name": "Olivia Martin",
+      "email": "olivia.martin@email.com",
+      "amount": "$1,999.00",
+      "avatar": "/avatars/01.png"
+    },
+    {
+      "id": 2,
+      "name": "Jackson Lee",
+      "email": "jackson.lee@email.com",
+      "amount": "$39.00",
+      "avatar": "/avatars/02.png"
+    },
+    {
+      "id": 3,
+      "name": "Isabella Nguyen",
+      "email": "isabella.nguyen@email.com",
+      "amount": "$299.00",
+      "avatar": "/avatars/03.png"
+    },
+    {
+      "id": 4,
+      "name": "William Kim",
+      "email": "will@email.com",
+      "amount": "$99.00",
+      "avatar": "/avatars/04.png"
+    },
+    {
+      "id": 5,
+      "name": "Sofia Davis",
+      "email": "sofia.davis@email.com",
+      "amount": "$39.00",
+      "avatar": "/avatars/05.png"
+    }
+  ],
+  "products": [
+    {
+      "id": "prod_001",
+      "name": "QuantumCore Processor",
+      "category": "CPU",
+      "price": 499.99,
+      "stock": 150,
+      "status": "Active",
+      "description": "Next-generation processor for high-performance computing.",
+      "image": "/quantum.webp"
+    },
+    {
+      "id": "prod_002",
+      "name": "AeroGlide Mouse",
+      "category": "Peripherals",
+      "price": 89.99,
+      "stock": 300,
+      "status": "Active",
+      "description": "Ergonomic wireless mouse with ultra-low latency.",
+      "image": "/mouse.jpg",
+      "variants": [
+        {
+          "id": "var_002_a",
+          "type": "Color",
+          "value": "Black",
+          "price": 89.99,
+          "stock": 150
+        },
+        {
+          "id": "var_002_b",
+          "type": "Color",
+          "value": "White",
+          "price": 92.99,
+          "stock": 150
+        }
+      ]
+    },
+    {
+      "id": "prod_003",
+      "name": "NovaView 4K Monitor",
+      "category": "Displays",
+      "price": 650.0,
+      "stock": 0,
+      "status": "Archived",
+      "description": "A 27-inch 4K UHD monitor with stunning color accuracy.",
+      "image": "/nova.jpg"
+    },
+    {
+      "id": "prod_004",
+      "name": "SilentKey Keyboard",
+      "category": "Peripherals",
+      "price": 120.5,
+      "stock": 25,
+      "status": "Draft",
+      "description": "A quiet and tactile mechanical keyboard for professionals.",
+      "image": "/silentkey.jpg",
+      "variants": [
+        {
+          "id": "var_004_a",
+          "type": "Layout",
+          "value": "US-QWERTY",
+          "price": 120.5,
+          "stock": 15
+        },
+        {
+          "id": "var_004_b",
+          "type": "Layout",
+          "value": "UK-QWERTY",
+          "price": 120.5,
+          "stock": 10
+        }
+      ]
+    }
+  ],
+  "revenueData": [
+    { "month": "Jan", "revenue": 4000, "goal": 6000 },
+    { "month": "Feb", "revenue": 3000, "goal": 5000 },
+    { "month": "Mar", "revenue": 5000, "goal": 7000 },
+    { "month": "Apr", "revenue": 4500, "goal": 6500 },
+    { "month": "May", "revenue": 6000, "goal": 8000 },
+    { "month": "Jun", "revenue": 7500, "goal": 9000 },
+    { "month": "Jul", "revenue": 7000, "goal": 8500 }
+  ],
+  "topProductsData": [
+    {
+      "name": "QuantumCore Processor",
+      "sales": 450,
+      "fill": "hsl(var(--primary))"
+    },
+    {
+      "name": "NovaView 4K Monitor",
+      "sales": 300,
+      "fill": "hsl(var(--primary) / 0.8)"
+    },
+    {
+      "name": "AeroGlide Mouse",
+      "sales": 250,
+      "fill": "hsl(var(--primary) / 0.6)"
+    },
+    {
+      "name": "SilentKey Keyboard",
+      "sales": 200,
+      "fill": "hsl(var(--primary) / 0.4)"
+    }
+  ]
+}
