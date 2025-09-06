@@ -1,31 +1,64 @@
-/**
- * Defines the specific names of icons used in the dashboard's stat cards.
- * This prevents typos and ensures only valid icon names are used.
- */
-export type IconName = "dollar-sign" | "users" | "credit-card" | "activity";
+// It's a best practice to define specific string literal types as their own type alias.
 
-/**
- * Represents a single statistic card displayed on the main dashboard.
- */
+export type IconName = "dollar-sign" | "users" | "credit-card" | "activity";
+export type OrderStatus = "Pending" | "Fulfilled" | "Cancelled";
+export type VariantType = "Size" | "Color" | "Material" | "Layout";
+export type PaymentMethod = "Credit Card" | "PayPal" | "Bank Transfer";
+export type ProductStatus = "Active" | "Draft" | "Archived";
+
+// --- Data Visualization Types ---
+
+export interface RevenueData {
+  month: string;
+  revenue: number;
+  goal: number;
+}
+
+export interface TopProductData {
+  name: string;
+  sales: number;
+  fill: string;
+}
+
 export interface Stat {
   id: number;
   title: string;
   value: string;
   change: string;
-  icon: IconName; // Uses the IconName type for strictness
+  icon: IconName;
 }
 
-/**
- * Defines the structure for a single data point in the monthly sales chart.
- */
-export interface SalesData {
-  name: string; // e.g., "Jan", "Feb"
-  total: number;
+// --- Core E-Commerce Types ---
+
+export interface Variant {
+  id: string;
+  type: VariantType;
+  value: string;
+  price: number;
+  stock: number;
 }
 
-/**
- * Represents a single recent sale entry in the dashboard list.
- */
+export interface Product {
+  id: string;
+  name: string;
+  category: string;
+  price: number;
+  stock: number;
+  status: ProductStatus;
+  description: string;
+  image: string;
+  variants?: Variant[];
+}
+
+export interface Customer {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  totalOrders: number;
+  totalSpent: number;
+}
+
 export interface RecentSale {
   id: number;
   name: string;
@@ -34,46 +67,32 @@ export interface RecentSale {
   avatar: string;
 }
 
-/**
- * Represents a product variant, like a specific size or color.
- */
-export interface Variant {
-  id: string;
-  type: string; // e.g., "Size", "Color"
-  value: string; // e.g., "Medium", "Blue"
+export interface OrderItem {
+  productId: string;
+  productName: string;
+  quantity: number;
   price: number;
-  stock: number;
+  variantType?: VariantType;
+  variantValue?: string;
 }
 
-/**
- * The main product interface, representing a single product in the inventory.
- */
-export interface Product {
+export interface Order {
   id: string;
-  name: string;
-  category: string;
-  price: number;
-  stock: number;
-  status: "Active" | "Draft" | "Archived";
-  description: string;
-  image: string;
-  variants?: Variant[]; // A product can optionally have variants
-}
-
-/**
- * Defines the structure for the revenue overview chart, comparing revenue to a goal.
- */
-export interface RevenueData {
-  month: string;
-  revenue: number;
-  goal: number;
-}
-
-/**
- * Represents a single data point for the top-selling products pie chart.
- */
-export interface TopProductData {
-  name: string;
-  sales: number;
-  fill: string; // The color used for the pie chart slice
+  customerId?: string; // Optional link to a customer
+  customerName: string;
+  customerEmail: string;
+  date: string;
+  status: OrderStatus;
+  items: OrderItem[];
+  shippingAddress: {
+    street: string;
+    city: string;
+    zipCode: string;
+    country: string;
+  };
+  paymentMethod: PaymentMethod;
+  subtotal: number;
+  shipping: number;
+  tax: number;
+  total: number;
 }

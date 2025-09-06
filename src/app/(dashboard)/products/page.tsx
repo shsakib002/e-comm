@@ -22,28 +22,16 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import data from "../../../../data/data.json";
-import { Product } from "@/lib/types";
-import { motion } from "framer-motion";
+import { Product, ProductStatus } from "@/lib/types";
+import { motion, Variants } from "framer-motion";
 
 export default function ProductsPage() {
   const [activeTab, setActiveTab] = React.useState("all");
   const [searchTerm, setSearchTerm] = React.useState("");
-  const { products } = data;
 
-  // Map product status to correct union type
-  const normalizedProducts: Product[] = products.map((product) => ({
-    ...product,
-    status:
-      product.status === "Active"
-        ? "Active"
-        : product.status === "Archived"
-        ? "Archived"
-        : product.status === "Draft"
-        ? "Draft"
-        : "Draft", // fallback to "Draft" if not matched
-  }));
+  const products = data.products as Product[];
 
-  const filteredProducts = normalizedProducts.filter((product) => {
+  const filteredProducts = products.filter((product) => {
     const matchesTab =
       activeTab === "all" || product.status.toLowerCase() === activeTab;
     const matchesSearch = product.name
@@ -52,23 +40,35 @@ export default function ProductsPage() {
     return matchesTab && matchesSearch;
   });
 
-  const gridVariants = {
+  const getBadgeVariant = (status: ProductStatus) => {
+    switch (status) {
+      case "Active":
+        return "default";
+      case "Draft":
+        return "secondary";
+      case "Archived":
+        return "destructive";
+      default:
+        return "outline";
+    }
+  };
+
+  const gridVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.05 } },
   };
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: "spring" as const, stiffness: 100 },
+      transition: { type: "spring", stiffness: 100 },
     },
   };
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Page Header with Filters and Actions */}
       <div className="flex items-center">
         <Tabs defaultValue="all" onValueChange={(value) => setActiveTab(value)}>
           <TabsList>
@@ -100,7 +100,6 @@ export default function ProductsPage() {
         </div>
       </div>
 
-      {/* Products Grid */}
       <motion.div
         className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
         variants={gridVariants}
@@ -159,15 +158,7 @@ export default function ProductsPage() {
                   <div className="font-semibold text-lg">
                     ${product.price.toFixed(2)}
                   </div>
-                  <Badge
-                    variant={
-                      product.status === "Archived"
-                        ? "destructive"
-                        : product.status === "Draft"
-                        ? "secondary"
-                        : "default"
-                    }
-                  >
+                  <Badge variant={getBadgeVariant(product.status)}>
                     {product.status}
                   </Badge>
                 </div>

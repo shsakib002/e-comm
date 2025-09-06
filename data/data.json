@@ -83,7 +83,7 @@
       "price": 499.99,
       "stock": 150,
       "status": "Active",
-      "description": "Next-generation processor for high-performance computing.",
+      "description": "Next-generation processor.",
       "image": "/quantum.webp"
     },
     {
@@ -93,7 +93,7 @@
       "price": 89.99,
       "stock": 300,
       "status": "Active",
-      "description": "Ergonomic wireless mouse with ultra-low latency.",
+      "description": "Ergonomic wireless mouse.",
       "image": "/mouse.jpg",
       "variants": [
         {
@@ -119,7 +119,7 @@
       "price": 650.0,
       "stock": 0,
       "status": "Archived",
-      "description": "A 27-inch 4K UHD monitor with stunning color accuracy.",
+      "description": "A 27-inch 4K UHD monitor.",
       "image": "/nova.jpg"
     },
     {
@@ -129,7 +129,7 @@
       "price": 120.5,
       "stock": 25,
       "status": "Draft",
-      "description": "A quiet and tactile mechanical keyboard for professionals.",
+      "description": "A quiet mechanical keyboard.",
       "image": "/silentkey.jpg",
       "variants": [
         {
@@ -147,6 +147,90 @@
           "stock": 10
         }
       ]
+    }
+  ],
+  "orders": [
+    {
+      "id": "ORD-001",
+      "customerName": "Liam Johnson",
+      "customerEmail": "liam@example.com",
+      "date": "2023-10-23",
+      "status": "Fulfilled",
+      "items": [
+        {
+          "productId": "prod_002",
+          "productName": "AeroGlide Mouse",
+          "quantity": 1,
+          "price": 92.99,
+          "variantType": "Color",
+          "variantValue": "White"
+        }
+      ],
+      "shippingAddress": {
+        "street": "123 Main St",
+        "city": "Anytown",
+        "zipCode": "12345",
+        "country": "USA"
+      },
+      "paymentMethod": "Credit Card",
+      "subtotal": 92.99,
+      "shipping": 15.0,
+      "tax": 9.3,
+      "total": 117.29
+    },
+    {
+      "id": "ORD-002",
+      "customerName": "Olivia Smith",
+      "customerEmail": "olivia@example.com",
+      "date": "2023-10-24",
+      "status": "Pending",
+      "items": [
+        {
+          "productId": "prod_001",
+          "productName": "QuantumCore Processor",
+          "quantity": 1,
+          "price": 499.99
+        }
+      ],
+      "shippingAddress": {
+        "street": "456 Oak Ave",
+        "city": "Someville",
+        "zipCode": "67890",
+        "country": "Canada"
+      },
+      "paymentMethod": "PayPal",
+      "subtotal": 499.99,
+      "shipping": 25.0,
+      "tax": 50.0,
+      "total": 574.99
+    },
+    {
+      "id": "ORD-003",
+      "customerName": "Noah Brown",
+      "customerEmail": "noah@example.com",
+      "date": "2023-10-25",
+      "status": "Cancelled",
+      "items": [
+        {
+          "productId": "prod_004",
+          "productName": "SilentKey Keyboard",
+          "quantity": 2,
+          "price": 120.5,
+          "variantType": "Layout",
+          "variantValue": "US-QWERTY"
+        }
+      ],
+      "shippingAddress": {
+        "street": "789 Pine Ln",
+        "city": "Otherplace",
+        "zipCode": "10112",
+        "country": "UK"
+      },
+      "paymentMethod": "Bank Transfer",
+      "subtotal": 241.0,
+      "shipping": 20.0,
+      "tax": 24.1,
+      "total": 285.1
     }
   ],
   "revenueData": [

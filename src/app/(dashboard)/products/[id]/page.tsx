@@ -23,23 +23,33 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import data from "../../../../../data/data.json";
-import { Product } from "@/lib/types";
+import { Product, ProductStatus } from "@/lib/types";
 
+// This function now uses a type assertion to ensure data conforms to the Product interface
 async function getProduct(id: string): Promise<Product | undefined> {
-  const product = data.products.find((p) => p.id === id);
-  if (!product) return undefined;
-  return {
-    ...product,
-    status: product.status as "Active" | "Archived" | "Draft",
-  };
+  const products = data.products as Product[];
+  return products.find((p) => p.id === id);
 }
 
-interface ProductDetailsPageProps {
+const getBadgeVariant = (status: ProductStatus) => {
+  switch (status) {
+    case "Active":
+      return "default";
+    case "Draft":
+      return "secondary";
+    case "Archived":
+      return "destructive";
+    default:
+      return "outline";
+  }
+};
+
+export default async function ProductDetailsPage({
+  params,
+}: {
   params: { id: string };
-}
-
-export default async function ProductDetailsPage({ params: { id } }: ProductDetailsPageProps) {
-  const product = await getProduct(id);
+}) {
+  const product = await getProduct(params.id);
 
   if (!product) {
     notFound();
@@ -47,12 +57,11 @@ export default async function ProductDetailsPage({ params: { id } }: ProductDeta
 
   return (
     <div className="flex flex-col gap-4">
-      {/* Back Button and Page Title */}
       <div className="flex items-center gap-4">
         <Link href="/products">
           <Button variant="outline" size="icon" className="h-7 w-7">
             <ChevronLeft className="h-4 w-4" />
-            <span className="sr-only">Back</span>
+            <span className="sr-only">Back to Products</span>
           </Button>
         </Link>
         <h1 className="flex-1 shrink-0 whitespace-nowrap text-xl font-semibold tracking-tight sm:grow-0">
@@ -70,10 +79,8 @@ export default async function ProductDetailsPage({ params: { id } }: ProductDeta
         </div>
       </div>
 
-      {/* Main Content Grid */}
       <div className="grid gap-4 md:grid-cols-[1fr_250px] lg:grid-cols-3 lg:gap-8">
         <div className="grid auto-rows-max items-start gap-4 lg:col-span-2 lg:gap-8">
-          {/* Product Info Card */}
           <Card>
             <CardHeader>
               <CardTitle className="text-2xl">{product.name}</CardTitle>
@@ -84,7 +91,6 @@ export default async function ProductDetailsPage({ params: { id } }: ProductDeta
             </CardContent>
           </Card>
 
-          {/* Product Variants Card - NEW */}
           {product.variants && product.variants.length > 0 && (
             <Card>
               <CardHeader>
@@ -124,7 +130,6 @@ export default async function ProductDetailsPage({ params: { id } }: ProductDeta
             </Card>
           )}
 
-          {/* Product Details Card */}
           <Card>
             <CardHeader>
               <CardTitle>Base Details</CardTitle>
@@ -149,27 +154,19 @@ export default async function ProductDetailsPage({ params: { id } }: ProductDeta
         </div>
 
         <div className="grid auto-rows-max items-start gap-4 lg:gap-8">
-          {/* Status Card */}
           <Card>
             <CardHeader>
               <CardTitle>Product Status</CardTitle>
             </CardHeader>
             <CardContent>
               <Badge
-                variant={
-                  product.status === "Archived"
-                    ? "destructive"
-                    : product.status === "Draft"
-                    ? "secondary"
-                    : "default"
-                }
+                variant={getBadgeVariant(product.status)}
                 className="text-sm"
               >
                 {product.status}
               </Badge>
             </CardContent>
           </Card>
-          {/* Product Image Card */}
           <Card className="overflow-hidden">
             <CardHeader>
               <CardTitle>Product Image</CardTitle>
